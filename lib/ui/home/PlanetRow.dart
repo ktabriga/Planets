@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:space_travel/planet.dart';
+import 'package:space_travel/ui/home/DetailPage.dart';
 
 class PlanetRow extends StatelessWidget {
   final Planet planet;
@@ -11,10 +12,13 @@ class PlanetRow extends StatelessWidget {
     return Container(
         margin: EdgeInsets.symmetric(vertical: 16),
         alignment: FractionalOffset.centerLeft,
-        child: Image (
-            image: AssetImage(planet.image),
-            height: 92.0,
-            width: 92.0
+        child: Hero(
+          tag: 'planet-hero-${planet.id}',
+          child: Image (
+              image: AssetImage(planet.image),
+              height: 92.0,
+              width: 92.0
+          )
         )
     );
 
@@ -102,14 +106,21 @@ class PlanetRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin:  const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-        child: Stack(
-            children: <Widget> [
-              _buildCard(),
-              _buildThumbnail()
-            ]
-        )
+    return GestureDetector(
+      onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (_) => DetailPage(planet)
+          )
+      ),
+      child: Container(
+          margin:  const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+          child: Stack(
+              children: <Widget> [
+                _buildCard(),
+                _buildThumbnail()
+              ]
+          )
+      ),
     );
   }
 
