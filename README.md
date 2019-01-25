@@ -1,4 +1,4 @@
-# space_travel
+# Planets
 
 A new Flutter project.
 
